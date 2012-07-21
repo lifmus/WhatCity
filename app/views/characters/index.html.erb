@@ -1,0 +1,70 @@
+<h1>Listing characters</h1>
+<%= yield :scripts %>
+<%= stylesheet_link_tag 'gmaps4rails' %>
+
+
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 0; padding: 0 }
+  #map_canvas { height: 100% }
+</style>
+<script type="text/javascript"
+  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAVieUQ5p9dprrVB2QBwKN7L8gmx0sT5kY&sensor=false">
+</script>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Longitude</th>
+    <th>Latitude</th>
+    <th>Gmaps</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @characters.each do |character| %>
+
+ <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(<%= character.longitude %>, <%= character.latitude %>),
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+      }
+    </script>
+
+
+  <tr>
+    <td><%= character.name %></td>
+    <td><%= character.address %></td>
+    <td><%= character.longitude %></td>
+    <td><%= character.latitude %></td>
+    <td><%= character.gmaps %></td>
+    <td><%= link_to 'Show', character %></td>
+    <td><%= link_to 'Edit', edit_character_path(character) %></td>
+    <td><%= link_to 'Destroy', character, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Character', new_character_path %>
+
+<!-- <%= gmaps("markers" => {"data" => @json},
+     "map_options" =>  { "provider" => "openlayers"}) %> -->
+
+
+	 <head>
+	    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	    
+	   
+	  </head>
+	  <body onload="initialize()">
+	    <div id="map_canvas" style="width:100%; height:100%"></div>
+	  </body>
