@@ -1,4 +1,6 @@
 Gmaps::Application.routes.draw do
+  
+  root :to => 'characters#index'
   resources :characters
 
   # The priority is based upon order of creation:
