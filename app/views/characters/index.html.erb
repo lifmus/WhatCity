@@ -24,20 +24,71 @@
     <th></th>
   </tr>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
      function initialize() {
        var mapOptions = {
          center: new google.maps.LatLng(<%= @characters.first.longitude %>, <%= @characters.first.latitude %>),
-         zoom: 15,
+         zoom: 10,
          mapTypeId: google.maps.MapTypeId.ROADMAP
        };
        var map = new google.maps.Map(document.getElementById("map_canvas"),
            mapOptions);
+
+		var marker = new google.maps.Marker({
+		      map:map,
+		      draggable:false,
+		      animation: google.maps.Animation.DROP,
+		      position: new google.maps.LatLng(<%= @characters.first.longitude %>, <%= @characters.first.latitude %>)
+		    });		
      }
-   </script>
+
+
+
+   </script> -->
+
+
+<!-- <script>
+
+
+var stockholm = new google.maps.LatLng(59.32522, 18.07002);
+  var parliament = new google.maps.LatLng(59.327383, 18.06747);
+  var marker;
+  var map;
+
+  function initialize() {
+    var mapOptions = {
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      center: stockholm
+    };
+
+    map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
+    marker = new google.maps.Marker({
+      map:map,
+      draggable:true,
+      animation: google.maps.Animation.DROP,
+      position: parliament
+    });
+    google.maps.event.addListener(marker, 'click', toggleBounce);
+  }
+
+  function toggleBounce() {
+
+    if (marker.getAnimation() != null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+
+</script> -->
 
 <% @characters.each do |character| %>
-  <tr>
+  
+	
+	<tr>
     <td><%= character.name %></td>
     <td><%= character.address %></td>
     <td><%= character.longitude %></td>
@@ -52,17 +103,47 @@
 
 <br />
 
+
+<script>
+
+var markers = [
+
+	<% @characters.each do |character| %>
+	['<%=character.name%>', <%=character.longitude%>, <%=character.latitude%>],
+	<% end %>
+];
+
+
+function initialize() {
+    var latlng = new google.maps.LatLng(38, -97);
+    var myOptions = {
+        zoom: 4,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+    var infowindow = new google.maps.InfoWindow(), marker, i;
+    for (i = 0; i < markers.length; i++) {  
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(markers[i][1], markers[i][2]),
+            map: map
+        });
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infowindow.setContent(markers[i][0]);
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+
+    }
+}
+
+</script>
+
 <%= link_to 'New Character', new_character_path %>
 
-<!-- <%= gmaps("markers" => {"data" => @json},
-     "map_options" =>  { "provider" => "openlayers"}) %> -->
 
-
-	 <head>
-	    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	    
-	   
-	  </head>
 	  <body onload="initialize()">
 	    <div id="map_canvas" style="width:100%; height:100%"></div>
 	  </body>
