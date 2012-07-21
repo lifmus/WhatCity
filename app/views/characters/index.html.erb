@@ -24,21 +24,19 @@
     <th></th>
   </tr>
 
+<script type="text/javascript">
+     function initialize() {
+       var mapOptions = {
+         center: new google.maps.LatLng(<%= @characters.first.longitude %>, <%= @characters.first.latitude %>),
+         zoom: 15,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+       };
+       var map = new google.maps.Map(document.getElementById("map_canvas"),
+           mapOptions);
+     }
+   </script>
+
 <% @characters.each do |character| %>
-
- <script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(<%= character.longitude %>, <%= character.latitude %>),
-          zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
-            mapOptions);
-      }
-    </script>
-
-
   <tr>
     <td><%= character.name %></td>
     <td><%= character.address %></td>
