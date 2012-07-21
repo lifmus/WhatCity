@@ -1,7 +1,5 @@
 <h1>Listing characters</h1>
 <%= yield :scripts %>
-<%= stylesheet_link_tag 'gmaps4rails' %>
-
 
 <style type="text/css">
   html { height: 100% }
@@ -18,72 +16,13 @@
     <th>Address</th>
     <th>Longitude</th>
     <th>Latitude</th>
-    <th>Gmaps</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<!-- <script type="text/javascript">
-     function initialize() {
-       var mapOptions = {
-         center: new google.maps.LatLng(<%= @characters.first.longitude %>, <%= @characters.first.latitude %>),
-         zoom: 10,
-         mapTypeId: google.maps.MapTypeId.ROADMAP
-       };
-       var map = new google.maps.Map(document.getElementById("map_canvas"),
-           mapOptions);
-
-		var marker = new google.maps.Marker({
-		      map:map,
-		      draggable:false,
-		      animation: google.maps.Animation.DROP,
-		      position: new google.maps.LatLng(<%= @characters.first.longitude %>, <%= @characters.first.latitude %>)
-		    });		
-     }
 
 
-
-   </script> -->
-
-
-<!-- <script>
-
-
-var stockholm = new google.maps.LatLng(59.32522, 18.07002);
-  var parliament = new google.maps.LatLng(59.327383, 18.06747);
-  var marker;
-  var map;
-
-  function initialize() {
-    var mapOptions = {
-      zoom: 13,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      center: stockholm
-    };
-
-    map = new google.maps.Map(document.getElementById("map_canvas"),
-            mapOptions);
-
-    marker = new google.maps.Marker({
-      map:map,
-      draggable:true,
-      animation: google.maps.Animation.DROP,
-      position: parliament
-    });
-    google.maps.event.addListener(marker, 'click', toggleBounce);
-  }
-
-  function toggleBounce() {
-
-    if (marker.getAnimation() != null) {
-      marker.setAnimation(null);
-    } else {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-  }
-
-</script> -->
 
 <% @characters.each do |character| %>
   
@@ -93,7 +32,6 @@ var stockholm = new google.maps.LatLng(59.32522, 18.07002);
     <td><%= character.address %></td>
     <td><%= character.longitude %></td>
     <td><%= character.latitude %></td>
-    <td><%= character.gmaps %></td>
     <td><%= link_to 'Show', character %></td>
     <td><%= link_to 'Edit', edit_character_path(character) %></td>
     <td><%= link_to 'Destroy', character, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -109,7 +47,7 @@ var stockholm = new google.maps.LatLng(59.32522, 18.07002);
 var markers = [
 
 	<% @characters.each do |character| %>
-	['<%=character.name%>', <%=character.longitude%>, <%=character.latitude%>],
+	['<%=character.name%>', <%=character.latitude%>, <%=character.longitude%>],
 	<% end %>
 ];
 
@@ -137,7 +75,7 @@ function initialize() {
         })(marker, i));
 
     }
-}
+};
 
 </script>
 

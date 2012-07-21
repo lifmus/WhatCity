@@ -5,7 +5,6 @@ class CreateCharacters < ActiveRecord::Migration
       t.string :address
       t.float :longitude
       t.float :latitude
-      t.boolean :gmaps
 
       t.timestamps
     end
