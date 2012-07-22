@@ -1,4 +1,8 @@
-<h1>Listing characters</h1>
+<h1>People</h1>
+<!-- Insert string interpolation to display name of each group -->
+
+
+
 <%= yield :scripts %>
 
 <style type="text/css">
@@ -32,9 +36,13 @@
     <td><%= character.address %></td>
     <td><%= character.longitude %></td>
     <td><%= character.latitude %></td>
-    <td><%= link_to 'Show', character %></td>
-    <td><%= link_to 'Edit', edit_character_path(character) %></td>
-    <td><%= link_to 'Destroy', character, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+	<td><div class="btn-group">
+	  <button class="btn"><%= link_to 'Show', character %></button>
+	  <button class="btn"><%= link_to 'Edit', edit_character_path(character) %></button>
+	  <button class="btn"><%= link_to 'Destroy', character, method: :delete, data: { confirm: 'Are you sure?' } %></button>
+	</div>
+	</td>
   </tr>
 <% end %>
 </table>
