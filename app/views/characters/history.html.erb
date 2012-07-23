@@ -1,0 +1,70 @@
+
+
+<div class="page-header" class="span4">
+<h1>People</h1>
+<!-- Insert string interpolation to display name of each group -->
+</div>
+
+
+<%= yield :scripts %>
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 0; padding: 0 }
+  #map_canvas { height: 100% }
+</style>
+<script type="text/javascript"
+  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAVieUQ5p9dprrVB2QBwKN7L8gmx0sT5kY&sensor=false">
+</script>
+
+
+<div class="span8">
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Longitude</th>
+    <th>Latitude</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+
+
+<% @characters.each do |character| %>
+  
+	
+	<tr>
+    <td><%= character.name %></td>
+    <td><%= character.address %></td>
+    <td><%= character.longitude %></td>
+    <td><%= character.latitude %></td>
+
+	<td>
+		
+		
+		<div class="btn-group">
+		  <a class="btn" type="button" href="<%= edit_character_path(character) %>">Edit</a>
+		</div>	
+	</td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Back', characters_path %>
+</div>
+
+
+
+
+
+	<a class="btn btn-primary" type="button" href="<%= new_character_path %>">Create a New Person</a>
+	
+
+
+
+
+
