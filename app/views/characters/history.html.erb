@@ -1,8 +1,13 @@
 <div class="hero-unit">
 
-<div class="page-header" class="span4">
+<div class="row">
+<div class="span4">
 <h1>People</h1>
+</div>
 <!-- Insert string interpolation to display name of each group -->
+<div class="span8" style="text-align:right">
+<a class="btn btn-primary" type="button" href="<%= new_character_path %>">Create a New Person</a>
+</div>
 </div>
 
 
@@ -18,15 +23,13 @@
 
 </div>
 <div class="span8">
-<table>
+<table class="table table-bordered">
   <tr>
     <th>Name</th>
     <th>Address</th>
     <th>Longitude</th>
     <th>Latitude</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Options</th>
   </tr>
 
 
@@ -54,17 +57,12 @@
 
 <br />
 
-<%= link_to 'Back', characters_path %>
+<%= link_to 'Back', :root %>
 </div>
 
 
 
 
-
-
-
-	<a class="btn btn-primary" type="button" href="<%= new_character_path %>">Create a New Person</a>
-	
 
 
 
