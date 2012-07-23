@@ -5,5 +5,3 @@ require File.expand_path('../application', __FILE__)
 Gmaps::Application.initialize!
 
 
-#bootstrap
-config.assets.precompile += %w( bootstrap.css )
