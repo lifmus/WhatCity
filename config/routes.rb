@@ -1,6 +1,10 @@
 Gmaps::Application.routes.draw do
   
   root :to => 'characters#index'
+  
+  match 'history' => 'characters#history'
+  
+  
   resources :characters
 
   # The priority is based upon order of creation:

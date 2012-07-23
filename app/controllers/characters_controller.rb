@@ -77,4 +77,10 @@ class CharactersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  def history
+    @characters = Character.all
+  end
+  
 end
